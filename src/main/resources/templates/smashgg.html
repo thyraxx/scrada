@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.1.0/css/bootstrap.min.css} "/>
+    </head>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col"> Event ID </th>
+            <th scope="col"> Event name </th>
+            <th scope="col"> Event slug </th>
+            <th scope="col"> isRegistrationOpen </th>
+            <th scope="col"> createdAt </th>
+            <th scope="col"> city </th>
+            <th scope="col"> name </th>
+            <th scope="col"> shortSlug </th>
+            <th scope="col"> registrationClosesAt </th>
+            <th scope="col"> id </th>
+            <th scope="col"> state </th>
+            <th scope="col"> slug </th>
+            <th scope="col"> state </th>
+            <th scope="col"> startAt </th>
+        </tr>
+        </thead>
+        <tbody>
+<!--        <tr th:if="${tournaments['data'].isEmpty()}">-->
+<!--            <td colspan="2"> No Tournaments Available </td>-->
+<!--        </tr>-->
+        <th:block th:each="events : ${tournaments}">
+            <th:block th:if="${events != ''}">
+            <tr th:scope="row" th:each="event : ${events['events']}">
+                <td><span th:text="${event['id']}"> Event ID </span></td>
+                <td><span th:text="${event['name']}"> Event name </span></td>
+                <td><span th:text="${event['slug']}"> Event slug </span></td>
+                <td><span th:text="${event['tournament']['isRegistrationOpen']}"> isRegistrationOpen </span></td>
+                <td><span th:text="${event['tournament']['createdAt']}"> createdAt </span></td>
+                <td><span th:text="${event['tournament']['city']}"> city </span></td>
+                <td><span th:text="${event['tournament']['name']}"> name </span></td>
+                <td><span th:text="${event['tournament']['shortSlug']}"> shortSlug </span></td>
+                <td><span th:text="${event['tournament']['registrationClosesAt']}"> registrationClosesAt </span></td>
+                <td><span th:text="${event['tournament']['id']}"> id </span></td>
+                <td><span th:text="${event['tournament']['state']}"> state </span></td>
+                <td><span th:text="${event['tournament']['slug']}"> slug </span></td>
+                <td><span th:text="${event['tournament']['state']}"> state </span></td>
+                <td><span th:text="${event['tournament']['startAt']}"> startAt </span></td>
+                <td><span th:text="${T(java.time.Instant).ofEpochSecond(event['tournament']['startAt'])}"> startAt </span></td>
+            </th:block>
+            </tr>
+        </th:block>
+
+        </tbody>
+    </table>
+
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</html>
