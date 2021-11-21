@@ -92,4 +92,8 @@ public class Tournament {
     public void setUserNotifiedAfterOpen(boolean userNotifiedAfterOpen) {
         isUserNotifiedAfterOpen = userNotifiedAfterOpen;
     }
+
+    public static class TournamentBuilder {
+
+    }
 }
