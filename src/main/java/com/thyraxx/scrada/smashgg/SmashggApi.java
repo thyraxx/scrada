@@ -1,8 +1,11 @@
 package com.thyraxx.scrada.smashgg;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.thyraxx.scrada.smashgg.model.EventsModel;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.thyraxx.scrada.smashgg.model.SmashJsonModel;
+import com.fasterxml.jackson.databind.node.TreeTraversingParser;
+import com.thyraxx.scrada.smashgg.model.SmashJsonModel;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -12,6 +15,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -92,16 +96,26 @@ public class SmashggApi {
         HttpResponse response = null;
         String test = null;
         List<Object> ja = null;
+        List<SmashJsonModel> smashJsonList = null;
+        RestTemplate restTemplate = new RestTemplate();
         try {
             response = HttpClients.createDefault().execute(post);
             test = EntityUtils.toString(response.getEntity());
-            ja = new JSONObject(test).getJSONObject("data").getJSONObject("tournaments").getJSONArray("nodes").toList();
+//            ja = new JSONObject(test).getJSONObject("data").getJSONObject("tournaments");
+//            JSONObject jsonObject = new JSONObject(test).getJSONObject("data").getJSONObject("tournaments").getJSONArray("nodes").getJSONObject(0);
+
+
+            ObjectMapper om = new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+            SmashJsonModel root = om.readValue(test, SmashJsonModel.class);
+            System.out.println();
+
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return ja;
+        return new ArrayList<Object>();
+
     }
 }
 
