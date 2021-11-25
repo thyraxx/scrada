@@ -1,5 +1,7 @@
 package com.thyraxx.scrada.scheduler;
 
+import com.thyraxx.scrada.smashgg.configuration.SmashggConfig;
+import com.thyraxx.scrada.smashgg.model.generated.Tournament;
 import com.thyraxx.scrada.smashgg.service.SmashggService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +24,10 @@ public class Scheduler {
         this.smashggService = smashggService;
     }
 
-    @Scheduled(fixedDelay = 90000)
+    @Scheduled(fixedDelay = SmashggConfig.smashRetrieveDelay)
     public void retrieveSmashTournamentData()
     {
-        logger.debug("Retrieving data on: " + dateFormat  + " -> using method retrieveSmashTournamentData");
+        logger.debug("Retrieving data on: " + dateFormat  + " -> using method 'retrieveSmashTournamentData'");
         smashggService.saveNewTournamentEvents();
     }
 }
