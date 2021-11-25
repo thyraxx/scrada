@@ -12,61 +12,65 @@ public class Tournament {
     private Long id;
 
     @NonNull
-    private Long tournamentId;
+    long tournamentId;
 
-    private String tournamentName;
-    private String tournamentSlug;
-    private String tournamentUrl;
-    private String registrationClosesAt;
+    long registrationClosesAt;
+    String name;
+    String shortSlug;
+    String slug;
+    boolean isRegistrationOpen;
+    String city;
+    long createdAt;
+    long startAt;
+    int state;
 
     private boolean isTournamentScanned;
-    private boolean isRegistrationOpen;
     private boolean isUserNotifiedBeforeOpen;
     private boolean isUserNotifiedAfterOpen;
 
     public Long getId() {
         return id;
     }
+    public void setId(long id) { this.id = id; }
 
-    @NonNull
-    public Long getTournamentId() {
+    public long getTournamentId() {
         return tournamentId;
     }
 
-    public void setTournamentId(@NonNull Long tournamentId) {
+    public void setTournamentId(long tournamentId) {
         this.tournamentId = tournamentId;
     }
 
-    public String getTournamentName() {
-        return tournamentName;
+    public long getRegistrationClosesAt() {
+        return registrationClosesAt;
     }
 
-    public void setTournamentName(String tournamentName) {
-        this.tournamentName = tournamentName;
+    public void setRegistrationClosesAt(long registrationClosesAt) {
+        this.registrationClosesAt = registrationClosesAt;
     }
 
-    public String getTournamentSlug() {
-        return tournamentSlug;
+    public String getName() {
+        return name;
     }
 
-    public void setTournamentSlug(String tournamentSlug) {
-        this.tournamentSlug = tournamentSlug;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTournamentUrl() {
-        return tournamentUrl;
+    public String getShortSlug() {
+        return shortSlug;
     }
 
-    public void setTournamentUrl(String tournamentUrl) {
-        this.tournamentUrl = tournamentUrl;
+    public void setShortSlug(String shortSlug) {
+        this.shortSlug = shortSlug;
     }
 
-    public boolean isTournamentScanned() {
-        return isTournamentScanned;
+    public String getSlug() {
+        return slug;
     }
 
-    public void setTournamentScanned(boolean tournamentScanned) {
-        isTournamentScanned = tournamentScanned;
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 
     public boolean isRegistrationOpen() {
@@ -77,23 +81,35 @@ public class Tournament {
         isRegistrationOpen = registrationOpen;
     }
 
-    public boolean isUserNotifiedBeforeOpen() {
-        return isUserNotifiedBeforeOpen;
+    public String getCity() {
+        return city;
     }
 
-    public void setUserNotifiedBeforeOpen(boolean userNotifiedBeforeOpen) {
-        isUserNotifiedBeforeOpen = userNotifiedBeforeOpen;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public boolean isUserNotifiedAfterOpen() {
-        return isUserNotifiedAfterOpen;
+    public long getCreatedAt() {
+        return createdAt;
     }
 
-    public void setUserNotifiedAfterOpen(boolean userNotifiedAfterOpen) {
-        isUserNotifiedAfterOpen = userNotifiedAfterOpen;
+    public void setCreatedAt(long createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public static class TournamentBuilder {
+    public long getStartAt() {
+        return startAt;
+    }
 
+    public void setStartAt(long startAt) {
+        this.startAt = startAt;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }
