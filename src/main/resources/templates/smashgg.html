@@ -28,27 +28,39 @@
 <!--        <tr th:if="${tournaments['data'].isEmpty()}">-->
 <!--            <td colspan="2"> No Tournaments Available </td>-->
 <!--        </tr>-->
-        <th:block th:each="events : ${tournaments}">
-            <th:block th:if="${events != ''}">
-            <tr th:scope="row" th:each="event : ${events['events']}">
-                <td><span th:text="${event['id']}"> Event ID </span></td>
-                <td><span th:text="${event['name']}"> Event name </span></td>
-                <td><span th:text="${event['slug']}"> Event slug </span></td>
-                <td><span th:text="${event['tournament']['isRegistrationOpen']}"> isRegistrationOpen </span></td>
-                <td><span th:text="${event['tournament']['createdAt']}"> createdAt </span></td>
-                <td><span th:text="${event['tournament']['city']}"> city </span></td>
-                <td><span th:text="${event['tournament']['name']}"> name </span></td>
-                <td><span th:text="${event['tournament']['shortSlug']}"> shortSlug </span></td>
-                <td><span th:text="${event['tournament']['registrationClosesAt']}"> registrationClosesAt </span></td>
-                <td><span th:text="${event['tournament']['id']}"> id </span></td>
-                <td><span th:text="${event['tournament']['state']}"> state </span></td>
-                <td><span th:text="${event['tournament']['slug']}"> slug </span></td>
-                <td><span th:text="${event['tournament']['state']}"> state </span></td>
-                <td><span th:text="${event['tournament']['startAt']}"> startAt </span></td>
-                <td><span th:text="${T(java.time.Instant).ofEpochSecond(event['tournament']['startAt'])}"> startAt </span></td>
-            </th:block>
-            </tr>
-        </th:block>
+
+<th:block th:each="tournament : ${tournaments}">
+    <th:block th:if="${tournament != ''}">
+<!--        <tr th:scope="row" th:each="event : ${}">-->
+        <tr th:scope="row">
+            <td><span th:text="${tournament.getTournamentId()}"> Event ID </span></td>
+            <td><span th:text="${tournament.getName()}"> Event name </span></td>
+            <td><span th:text="${tournament.getShortSlug()}"> Event slug </span></td>
+        </tr>
+    </th:block>
+</th:block>
+
+<!--        <th:block th:each="events : ${tournaments}">-->
+<!--            <th:block th:if="${events != ''}">-->
+<!--            <tr th:scope="row" th:each="event : ${events['events']}">-->
+<!--                <td><span th:text="${event['id']}"> Event ID </span></td>-->
+<!--                <td><span th:text="${event['name']}"> Event name </span></td>-->
+<!--                <td><span th:text="${event['slug']}"> Event slug </span></td>-->
+<!--                <td><span th:text="${event['tournament']['isRegistrationOpen']}"> isRegistrationOpen </span></td>-->
+<!--                <td><span th:text="${event['tournament']['createdAt']}"> createdAt </span></td>-->
+<!--                <td><span th:text="${event['tournament']['city']}"> city </span></td>-->
+<!--                <td><span th:text="${event['tournament']['name']}"> name </span></td>-->
+<!--                <td><span th:text="${event['tournament']['shortSlug']}"> shortSlug </span></td>-->
+<!--                <td><span th:text="${event['tournament']['registrationClosesAt']}"> registrationClosesAt </span></td>-->
+<!--                <td><span th:text="${event['tournament']['id']}"> id </span></td>-->
+<!--                <td><span th:text="${event['tournament']['state']}"> state </span></td>-->
+<!--                <td><span th:text="${event['tournament']['slug']}"> slug </span></td>-->
+<!--                <td><span th:text="${event['tournament']['state']}"> state </span></td>-->
+<!--                <td><span th:text="${event['tournament']['startAt']}"> startAt </span></td>-->
+<!--                <td><span th:text="${T(java.time.Instant).ofEpochSecond(event['tournament']['startAt'])}"> startAt </span></td>-->
+<!--            </th:block>-->
+<!--            </tr>-->
+<!--        </th:block>-->
 
         </tbody>
     </table>
