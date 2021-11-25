@@ -3,6 +3,11 @@ package com.thyraxx.scrada.smashgg.model.generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Event {
+    int id;
+    String name;
+    String slug;
+    Tournament tournament;
+
     @JsonProperty("id")
     public int getId() {
         return this.id;
@@ -12,7 +17,6 @@ public class Event {
         this.id = id;
     }
 
-    int id;
 
     @JsonProperty("name")
     public String getName() {
@@ -23,7 +27,6 @@ public class Event {
         this.name = name;
     }
 
-    String name;
 
     @JsonProperty("slug")
     public String getSlug() {
@@ -34,7 +37,6 @@ public class Event {
         this.slug = slug;
     }
 
-    String slug;
 
     @JsonProperty("tournament")
     public Tournament getTournament() {
@@ -44,6 +46,4 @@ public class Event {
     public void setTournament(Tournament tournament) {
         this.tournament = tournament;
     }
-
-    Tournament tournament;
 }
