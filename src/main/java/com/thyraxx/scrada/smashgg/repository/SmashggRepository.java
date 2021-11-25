@@ -9,6 +9,4 @@ import java.util.List;
 @Repository
 public interface SmashggRepository extends JpaRepository<Tournament, Long> {
     List<Tournament> findAll();
-//    List<Tournament> findAllByRegistrationOpen();
-//    List<Tournament> findAllByHasMessageSentAfterRegistrationOpen();
 }
