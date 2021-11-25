@@ -1,11 +1,13 @@
 package com.thyraxx.scrada.smashgg;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.thyraxx.scrada.smashgg.model.SmashJsonModel;
-import com.fasterxml.jackson.databind.node.TreeTraversingParser;
-import com.thyraxx.scrada.smashgg.model.SmashJsonModel;
+import com.thyraxx.scrada.smashgg.model.Tournament;
+import com.thyraxx.scrada.smashgg.model.TournamentDTO;
+import com.thyraxx.scrada.smashgg.model.generated.Event;
+import com.thyraxx.scrada.smashgg.model.generated.Node;
+import com.thyraxx.scrada.smashgg.model.generated.Root;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -13,8 +15,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -83,7 +84,7 @@ public class SmashggApi {
                 }
             """;
 
-    public static List<Object> runAPIQuery(String variables) {
+    public static List<Tournament> getSmashTournamentEvents(String variables) {
         HttpPost post = new HttpPost(baseUrl + graphql);
         List<NameValuePair> params = new ArrayList<>();
 
@@ -93,28 +94,34 @@ public class SmashggApi {
 
         post.setEntity(new UrlEncodedFormEntity(params, StandardCharsets.UTF_8));
 
+        // TODO: please, clean up/change
         HttpResponse response = null;
-        String test = null;
-        List<Object> ja = null;
-        List<SmashJsonModel> smashJsonList = null;
-        RestTemplate restTemplate = new RestTemplate();
+        String responseJsonString = null;
+        List<Tournament> tournaments = new ArrayList<>();
         try {
             response = HttpClients.createDefault().execute(post);
-            test = EntityUtils.toString(response.getEntity());
-//            ja = new JSONObject(test).getJSONObject("data").getJSONObject("tournaments");
-//            JSONObject jsonObject = new JSONObject(test).getJSONObject("data").getJSONObject("tournaments").getJSONArray("nodes").getJSONObject(0);
-
+            responseJsonString = EntityUtils.toString(response.getEntity());
 
             ObjectMapper om = new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-            SmashJsonModel root = om.readValue(test, SmashJsonModel.class);
-            System.out.println();
+            Root root = om.readValue(responseJsonString, Root.class);
+
+            ModelMapper modelMapper = new ModelMapper();
+            for(Node node : root.getData().getTournaments().getNodes())
+            {
+                for (Event event : node.getEvents())
+                {
+                    Tournament tournamentDTO = modelMapper.map(event.getTournament(), Tournament.class);
+                    tournaments.add(tournamentDTO);
+                }
+            }
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return new ArrayList<Object>();
+
+        return tournaments;
 
     }
 }
