@@ -1,14 +1,11 @@
 package com.thyraxx.scrada.smashgg.controller;
 
-import com.thyraxx.scrada.smashgg.model.EventsModel;
 import com.thyraxx.scrada.smashgg.service.SmashggService;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.io.IOException;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class SmashggController {
@@ -29,15 +26,20 @@ public class SmashggController {
     @GetMapping("/test")
     public String test(Model model)
     {
-        model.addAttribute("tournaments", smashggService.getAllTournaments());
+        smashggService.saveNewTournamentEvents();
         return "index";
     }
 
     @GetMapping("/smashgg")
     public String smashTournaments(Model model) {
+        model.addAttribute("tournaments", smashggService.getAllTournaments());
 
-        model.addAttribute("tournaments", smashggService.getTournamentsEvents("{ \"lastDate\":100000}"));
+        return "smashgg";
+    }
 
+    @PostMapping("/smashgg")
+    public String smashTournaments()
+    {
         return "smashgg";
     }
 }
