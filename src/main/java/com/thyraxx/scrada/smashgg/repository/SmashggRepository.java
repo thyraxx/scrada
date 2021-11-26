@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface SmashggRepository extends JpaRepository<Tournament, Long> {
     List<Tournament> findAll();
+    boolean existsByTournamentId(long id);
 }
