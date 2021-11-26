@@ -3,14 +3,13 @@ package com.thyraxx.scrada.smashgg.service;
 import com.thyraxx.scrada.smashgg.SmashggApi;
 import com.thyraxx.scrada.smashgg.model.Tournament;
 import com.thyraxx.scrada.smashgg.model.TournamentDTO;
-import com.thyraxx.scrada.smashgg.model.generated.Node;
 import com.thyraxx.scrada.smashgg.repository.SmashggRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
