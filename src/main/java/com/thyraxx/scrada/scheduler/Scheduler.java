@@ -24,7 +24,7 @@ public class Scheduler {
         this.smashggService = smashggService;
     }
 
-    @Scheduled(fixedDelay = SmashggConfig.smashRetrieveDelay)
+    @Scheduled(fixedDelay = SmashggConfig.smashggAPICallDelay)
     public void retrieveSmashTournamentData()
     {
         logger.debug("Retrieving data on: " + dateFormat  + " -> using method 'retrieveSmashTournamentData'");
