@@ -23,7 +23,7 @@ public class SmashggService {
         this.smashggRepository = smashggRepository;
     }
 
-    public List<TournamentDTO> getAllTournaments()
+    public List<TournamentDTO> getAllTournamentsDTO()
     {
         ModelMapper modelMapper = new ModelMapper();
         return smashggRepository.findAll().stream()

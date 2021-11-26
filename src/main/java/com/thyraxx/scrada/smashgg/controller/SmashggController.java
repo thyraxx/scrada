@@ -32,7 +32,7 @@ public class SmashggController {
 
     @GetMapping("/smashgg")
     public String smashTournaments(Model model) {
-        model.addAttribute("tournaments", smashggService.getAllTournaments());
+        model.addAttribute("tournaments", smashggService.getAllTournamentsDTO());
 
         return "smashgg";
     }
