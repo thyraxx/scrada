@@ -12,17 +12,17 @@ public class Tournament {
     private Long id;
 
     @NonNull
-    long tournamentId;
+    private long tournamentId;
 
-    long registrationClosesAt;
-    String name;
-    String shortSlug;
-    String slug;
-    boolean isRegistrationOpen;
-    String city;
-    long createdAt;
-    long startAt;
-    int state;
+    private long registrationClosesAt;
+    private String name;
+    private String shortSlug;
+    private String slug;
+    private boolean isRegistrationOpen;
+    private String city;
+    private long createdAt;
+    private long startAt;
+    private int state;
 
     private boolean isTournamentScanned;
     private boolean isUserNotifiedBeforeOpen;
