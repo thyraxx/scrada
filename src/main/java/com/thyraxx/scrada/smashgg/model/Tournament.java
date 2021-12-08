@@ -115,4 +115,44 @@ public class Tournament {
     public void setState(int state) {
         this.state = state;
     }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public long getEndAt() {
+        return endAt;
+    }
+
+    public void setEndAt(long endAt) {
+        this.endAt = endAt;
+    }
+
+    public boolean isTournamentScanned() {
+        return isTournamentScanned;
+    }
+
+    public void setTournamentScanned(boolean tournamentScanned) {
+        isTournamentScanned = tournamentScanned;
+    }
+
+    public boolean isUserNotifiedBeforeOpen() {
+        return isUserNotifiedBeforeOpen;
+    }
+
+    public void setUserNotifiedBeforeOpen(boolean userNotifiedBeforeOpen) {
+        isUserNotifiedBeforeOpen = userNotifiedBeforeOpen;
+    }
+
+    public boolean isUserNotifiedAfterOpen() {
+        return isUserNotifiedAfterOpen;
+    }
+
+    public void setUserNotifiedAfterOpen(boolean userNotifiedAfterOpen) {
+        isUserNotifiedAfterOpen = userNotifiedAfterOpen;
+    }
 }
