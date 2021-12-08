@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.1.0/css/bootstrap.min.css} "/>
+    </head>
+
+    Hello, person.
+<!--    <table class="table">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th scope="col"> ID </th>-->
+<!--            <th scope="col"> T'ID </th>-->
+<!--            <th scope="col"> T'Name </th>-->
+<!--            <th scope="col"> isTournamentScanned </th>-->
+<!--            <th scope="col"> isRegistrationOpen </th>-->
+<!--            <th scope="col"> isUserNotifiedBeforeOpen </th>-->
+<!--            <th scope="col"> isUserNotifiedAfterOpen </th>-->
+<!--            <th scope="col"> isUserNotifiedAfterOpen </th>-->
+<!--            <th scope="col"> TournamentSlug </th>-->
+<!--            <th scope="col"> TournamentUrl </th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:if="${tournaments.isEmpty()}">-->
+<!--            <td colspan="2"> No Tournaments Available </td>-->
+<!--        </tr>-->
+<!--        <tr th:scope="row" th:each="tournament : ${tournaments}">-->
+<!--            <td><span th:text="${tournament.getId()}"> ID </span></td>-->
+<!--            <td><span th:text="${tournament.getTournamentId()}">T'ID </span></td>-->
+<!--            <td><span th:text="${tournament.getTournamentName()}"> T'Name </span></td>-->
+<!--            <td><span th:text="${tournament.isTournamentScanned()}"> isTournamentScanned </span></td>-->
+<!--            <td><span th:text="${tournament.isRegistrationOpen()}"> isRegistrationOpen </span></td>-->
+<!--            <td><span th:text="${tournament.isUserNotifiedBeforeOpen()}"> isUserNotifiedBeforeOpen </span></td>-->
+<!--            <td><span th:text="${tournament.isUserNotifiedAfterOpen()}"> isUserNotifiedAfterOpen </span></td>-->
+<!--            <td><span th:text="${tournament.getTournamentSlug()}"> TournamentSlug </span></td>-->
+<!--            <td><span th:text="${tournament.getTournamentUrl()}"> TournamentUrl </span></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</html>
