@@ -1,17 +1,15 @@
 package com.thyraxx.scrada.smashgg.model;
 
-import org.springframework.lang.NonNull;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Tournament {
 
-    @Id
+    // TODO: remove not used?
     private Long id;
 
-    @NonNull
+    @Id
     private long tournamentId;
 
     private long registrationClosesAt;
