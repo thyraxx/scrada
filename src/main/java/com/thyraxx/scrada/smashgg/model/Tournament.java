@@ -22,7 +22,12 @@ public class Tournament {
     private String city;
     private long createdAt;
     private long startAt;
+    private long endAt;
     private int state;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tournament_tournament_id")
+    private List<Event> events;
 
     private boolean isTournamentScanned;
     private boolean isUserNotifiedBeforeOpen;
