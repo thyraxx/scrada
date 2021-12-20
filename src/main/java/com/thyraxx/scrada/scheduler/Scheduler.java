@@ -24,24 +24,30 @@ public class Scheduler {
         this.smashggService = smashggService;
     }
 
-    @Scheduled(fixedDelay = SmashggConfig.smashggAPICallDelay) // 90 seconds
+    @Scheduled(fixedDelay = SmashggConfig.smashggAPICallDelay) // 60 seconds
     public void retrieveSmashTournamentData()
     {
         logger.debug("Retrieving data on: " + dateFormat  + " -> using method 'retrieveSmashTournamentData'");
         smashggService.saveNewTournamentEvents();
+
+//        logger.debug("Updating data on: " + dateFormat  + " -> using method 'retrieveSmashTournamentData'");
+//        smashggService.updateExistingTournaments();
+
+        logger.debug("Sending notification on: " + dateFormat  + " -> using method 'retrieveSmashTournamentData'");
+        smashggService.sendNotification();
     }
 
-    @Scheduled(fixedDelay = SmashggConfig.smashggAPICallDelay) // 90 seconds
-    public void updateExistingTournamentData()
-    {
-        logger.debug("Updating data on: " + dateFormat  + " -> using method 'updateExistingTournamentData'");
-        smashggService.updateExistingTournaments();
-    }
+//    @Scheduled(fixedDelay = SmashggConfig.smashggAPICallDelay) // 60 seconds
+//    public void updateExistingTournamentData()
+//    {
+//        logger.debug("Updating data on: " + dateFormat  + " -> using method 'updateExistingTournamentData'");
+//        smashggService.updateExistingTournaments();
+//    }
 
     @Scheduled(fixedDelay = 43200000) // 12 hours
     public void deleteFinishedTournaments()
     {
-        logger.debug("Deleting data on: " + dateFormat  + " -> using method 'deleteFinishedTournaments'");
+        logger.debug("Deleting expired/finished tournaments data on: " + dateFormat  + " -> using method 'deleteFinishedTournaments'");
         smashggService.deleteFinishedTournaments();
     }
 }
