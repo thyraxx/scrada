@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -50,7 +51,8 @@ public class SmashggService {
     {
         // TODO: better var name or separate into it's own config?
         Set<Tournament> newTournaments = getSmashTournamentsEvents(SmashggConfig.searchTournamentsAfterEpochTime).stream()
-                .filter(tournament -> !tournament.getEvents().isEmpty() && !smashggRepository.existsByTournamentId(tournament.getTournamentId()))
+                .filter(tournament -> !tournament.getEvents().isEmpty() )
+//                        && !smashggRepository.existsByTournamentId(tournament.getTournamentId()))
                 .collect(Collectors.toSet());
 
         smashggRepository.saveAll(newTournaments);
@@ -76,25 +78,52 @@ public class SmashggService {
 
     public void sendNotification()
     {
+        // TODO: ???
+        LocalDateTime now = LocalDateTime.now();
+        ZoneId zone = ZoneId.of("Europe/Berlin");
+
         List<Tournament> tournaments = smashggRepository.findAll();
 
-        tournaments.forEach(tournament -> {
-            if(tournament.isRegistrationOpen() && !tournament.isUserNotifiedAfterOpen())
-            {
-                SmashggTelegramBot.sendMessage(-477115672,
-                        "<b>" + tournament.getName() + "</b> \n\n" +
-                        "<b>Location:</b> " + tournament.getCity() + "\n\n" +
-                        "<b>Date:</b> " + LocalDateTime.ofEpochSecond(tournament.getStartAt(), 0, ZoneOffset.ofHours(1)) + " \n\n" +
-                        "<b>Events:</b> \n\n" +
-                            for(Event event : tournament.getEvents())
-                            {
-                                event.getValueLimit()
-                            }
-                + "https://smash.gg/" + tournament.getSlug()
+        tournaments.stream()
+            .filter(tournament -> (!tournament.isRegistrationOpen() && !tournament.isUserNotifiedBeforeOpen()) || (tournament.isRegistrationOpen() && !tournament.isUserNotifiedAfterOpen()))
+            .forEach(tournament -> {
 
-                );
-            }
-        });
+
+                String tournamentTelegramMessage = "";
+                if(tournament.isRegistrationOpen() && !tournament.isUserNotifiedAfterOpen())
+                {
+                    tournament.setUserNotifiedBeforeOpen(true);
+                    tournament.setUserNotifiedAfterOpen(true);
+                }
+
+                if(!tournament.isRegistrationOpen() && !tournament.isUserNotifiedBeforeOpen())
+                {
+                    tournamentTelegramMessage += "<b>**NOT OPEN FOR REGISTRATIONS**</b>\n\n";
+                    tournament.setUserNotifiedBeforeOpen(true);
+                }
+
+                StringBuilder eventsInfo = new StringBuilder();
+
+                if(!tournament.getEvents().isEmpty()) {
+                    eventsInfo.append("<b>Events:</b>\n");
+
+                    for (Event event : tournament.getEvents()) {
+                        eventsInfo.append(event.getEventName() + " <b>Cap:</b> " + event.getValueLimit() + "\n");
+                    }
+                }
+
+                // TODO: this builds the message
+                tournamentTelegramMessage += "<b>" + tournament.getName() + "</b> \n\n" +
+                        "<b>Location:</b> " + tournament.getCity() + "\n\n" +
+                        "<b>Date:</b> " + LocalDateTime.ofEpochSecond(tournament.getStartAt(), 0, zone.getRules().getOffset(now)) + " \n\n" +
+                        eventsInfo + "\n" +
+                        "https://smash.gg/" + tournament.getSlug();
+
+                // TODO: insert telegram_chat_id
+                SmashggTelegramBot.sendMessage(0, tournamentTelegramMessage);
+
+                smashggRepository.save(tournament);
+            });
     }
 
     public void save(Tournament tournament)
