@@ -3,6 +3,7 @@ package com.thyraxx.scrada.smashgg;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.thyraxx.scrada.smashgg.model.SmashJsonModel;
+import com.thyraxx.scrada.customproperties.CustomProperties;
 import com.thyraxx.scrada.smashgg.model.Tournament;
 import com.thyraxx.scrada.smashgg.model.TournamentDTO;
 import com.thyraxx.scrada.smashgg.model.generated.*;
@@ -18,6 +19,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -33,6 +35,7 @@ public class SmashggApi {
     private static final String baseUrl = ("https://api.smash.gg");
     private static final String graphql = "/gql/alpha";
     private static final String expandRegistration = "?expand=registrationOption";
+
 //    private static final String alltournamenstQuery =
 //            """
 //                query getAllUltimateTournaments($lastDate: Timestamp!) {
@@ -123,10 +126,11 @@ public class SmashggApi {
                 }
             """;
 
+    // TODO: integrate/retrieve from graphql once the API finally added retrieving max number of participants per event
     public static Map<String, Integer> getExtraEventInfo(String slug) {
         HttpGet get = new HttpGet(baseUrl + "/" + slug + expandRegistration);
 
-        get.addHeader("authorization", "Bearer 3fb6e59d9be9b98785686de4e92766d4");
+        get.addHeader("authorization", "Bearer " + CustomProperties.getSmashggApiKey());
 
         HttpResponse response = null;
         String responseJsonString = null;
@@ -154,7 +158,7 @@ public class SmashggApi {
         HttpPost post = new HttpPost(baseUrl + graphql);
         List<NameValuePair> params = new ArrayList<>();
 
-        post.addHeader("authorization", "Bearer 3fb6e59d9be9b98785686de4e92766d4");
+        post.addHeader("authorization", "Bearer " + CustomProperties.getSmashggApiKey());
         params.add(new BasicNameValuePair("query", alltournamenstQuery));
         params.add(new BasicNameValuePair("variables", variables));
 
@@ -199,7 +203,7 @@ public class SmashggApi {
         HttpPost post = new HttpPost(baseUrl + graphql);
         List<NameValuePair> params = new ArrayList<>();
 
-        post.addHeader("authorization", "Bearer 3fb6e59d9be9b98785686de4e92766d4");
+        post.addHeader("authorization", "Bearer " + CustomProperties.getSmashggApiKey());
         params.add(new BasicNameValuePair("query", singleTournamentQuery));
         params.add(new BasicNameValuePair("variables", "{ \"id\":" + tournamentId + "}"));
 
