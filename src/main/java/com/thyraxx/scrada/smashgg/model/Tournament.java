@@ -23,7 +23,7 @@ public class Tournament {
     private long endAt;
     private int state;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "tournament_tournament_id")
     private List<Event> events;
 
