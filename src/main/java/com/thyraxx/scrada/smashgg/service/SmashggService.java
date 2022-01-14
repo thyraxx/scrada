@@ -1,5 +1,6 @@
 package com.thyraxx.scrada.smashgg.service;
 
+import com.thyraxx.scrada.customproperties.CustomProperties;
 import com.thyraxx.scrada.smashgg.SmashggApi;
 import com.thyraxx.scrada.smashgg.configuration.SmashggConfig;
 import com.thyraxx.scrada.smashgg.model.Event;
@@ -119,7 +120,7 @@ public class SmashggService {
                         "https://smash.gg/" + tournament.getSlug();
 
                 // TODO: insert telegram_chat_id
-                SmashggTelegramBot.sendMessage(0, tournamentTelegramMessage);
+                SmashggTelegramBot.sendMessage(CustomProperties.getTelegramChatId(), tournamentTelegramMessage);
 
                 smashggRepository.save(tournament);
             });
