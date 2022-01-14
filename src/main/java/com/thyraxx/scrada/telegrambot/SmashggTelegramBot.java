@@ -3,7 +3,6 @@ package com.thyraxx.scrada.telegrambot;
 import com.pengrad.telegrambot.Callback;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
-import com.pengrad.telegrambot.model.request.ParseMode;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
 import org.slf4j.Logger;
@@ -12,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 import static com.pengrad.telegrambot.model.request.ParseMode.HTML;
-import static com.pengrad.telegrambot.model.request.ParseMode.MarkdownV2;
 
 public class SmashggTelegramBot {
 
