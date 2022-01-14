@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomProperties {
 
+    private static final Logger logger = Logger.getLogger(CustomProperties.class);
     private static String smashggApiKey;
 
     public static String getSmashggApiKey()
