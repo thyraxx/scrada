@@ -198,6 +198,7 @@ public class SmashggApi {
         return tournaments;
     }
 
+    // TODO: unused currently
     public static Tournament updateExistingTournaments(long tournamentId)
     {
         HttpPost post = new HttpPost(baseUrl + graphql);
