@@ -51,8 +51,7 @@ public class SmashggService {
     {
         // TODO: better var name or separate into it's own config?
         Set<Tournament> newTournaments = getSmashTournamentsEvents(SmashggConfig.searchTournamentsAfterEpochTime).stream()
-                .filter(tournament -> !tournament.getEvents().isEmpty() )
-//                        && !smashggRepository.existsByTournamentId(tournament.getTournamentId()))
+                .filter(tournament -> !tournament.getEvents().isEmpty() && !smashggRepository.existsByTournamentId(tournament.getTournamentId()))
                 .collect(Collectors.toSet());
 
         smashggRepository.saveAll(newTournaments);
@@ -83,11 +82,9 @@ public class SmashggService {
         ZoneId zone = ZoneId.of("Europe/Berlin");
 
         List<Tournament> tournaments = smashggRepository.findAll();
-
         tournaments.stream()
             .filter(tournament -> (!tournament.isRegistrationOpen() && !tournament.isUserNotifiedBeforeOpen()) || (tournament.isRegistrationOpen() && !tournament.isUserNotifiedAfterOpen()))
             .forEach(tournament -> {
-
 
                 String tournamentTelegramMessage = "";
                 if(tournament.isRegistrationOpen() && !tournament.isUserNotifiedAfterOpen())
@@ -119,7 +116,6 @@ public class SmashggService {
                         eventsInfo + "\n" +
                         "https://smash.gg/" + tournament.getSlug();
 
-                // TODO: insert telegram_chat_id
                 SmashggTelegramBot.sendMessage(CustomProperties.getTelegramChatId(), tournamentTelegramMessage);
 
                 smashggRepository.save(tournament);
