@@ -17,7 +17,6 @@ public class SmashggTelegramBot {
 
     private static final Logger logger = LoggerFactory.getLogger(SmashggTelegramBot.class);
 
-    //TODO: Seperate token into config
     private static final TelegramBot smashTelegramBot = new TelegramBot(CustomProperties.getTelegramBotKey());
 
     public static TelegramBot smashTelegramBotInstance() {
