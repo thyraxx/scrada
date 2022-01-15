@@ -12,6 +12,7 @@ public class CustomProperties {
 
     private static String smashggApiKey;
     private static Long telegramChatId;
+    private static String telegramBotKey;
 
     public static String getSmashggApiKey()
     {
@@ -25,12 +26,20 @@ public class CustomProperties {
         return telegramChatId;
     }
 
+    public static String getTelegramBotKey()
+    {
+        logger.debug("getTelegramBotKey: " + telegramBotKey);
+        return telegramBotKey;
+    }
+
     @Autowired
     public CustomProperties(
             @Value("${smashggapikey}") String smashggApiKey,
-            @Value("${telegram_chat_id}") Long telegramChatId)
+            @Value("${telegram_chat_id}") Long telegramChatId,
+            @Value("${telegram_bot_key}") String telegramBotKey)
     {
         CustomProperties.smashggApiKey = smashggApiKey;
         CustomProperties.telegramChatId = telegramChatId;
+        CustomProperties.telegramBotKey = telegramBotKey;
     }
 }
