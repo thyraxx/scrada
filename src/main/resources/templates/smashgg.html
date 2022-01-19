@@ -12,14 +12,15 @@
             <th scope="col"> Event name </th>
             <th scope="col"> Event slug </th>
             <th scope="col"> isRegistrationOpen </th>
+            <th scope="col"> isUserNotifiedBeforeOpen </th>
+            <th scope="col"> isUserNotifiedAfterOpen </th>
             <th scope="col"> createdAt </th>
             <th scope="col"> city </th>
-            <th scope="col"> name </th>
-            <th scope="col"> shortSlug </th>
+<!--            <th scope="col"> name </th>-->
+<!--            <th scope="col"> shortSlug </th>-->
             <th scope="col"> registrationClosesAt </th>
-            <th scope="col"> id </th>
-            <th scope="col"> state </th>
-            <th scope="col"> slug </th>
+<!--            <th scope="col"> id </th>-->
+<!--            <th scope="col"> slug </th>-->
             <th scope="col"> state </th>
             <th scope="col"> startAt </th>
         </tr>
@@ -36,6 +37,14 @@
             <td><span th:text="${tournament.getTournamentId()}"> Event ID </span></td>
             <td><span th:text="${tournament.getName()}"> Event name </span></td>
             <td><span th:text="${tournament.getShortSlug()}"> Event slug </span></td>
+            <td><span th:text="${tournament.isRegistrationOpen()}"> IsRegistrationOpen </span></td>
+            <td><span th:text="${tournament.isUserNotifiedBeforeOpen()}"> isUserNotifiedBeforeOpen </span></td>
+            <td><span th:text="${tournament.isUserNotifiedAfterOpen()}"> isUserNotifiedAfterOpen </span></td>
+            <td><span th:text="${tournament.getCreatedAt()}"> CreatedAt </span></td>
+            <td><span th:text="${tournament.getCity()}"> City </span></td>
+            <td><span th:text="${T(java.time.Instant).ofEpochSecond(tournament.getRegistrationClosesAt())}"> RegistrationClosesAt </span></td>
+            <td><span th:text="${tournament.getState()}"> state </span></td>
+            <td><span th:text="${T(java.time.Instant).ofEpochSecond(tournament.getStartAt())}"> startAt </span></td>
         </tr>
     </th:block>
 </th:block>
