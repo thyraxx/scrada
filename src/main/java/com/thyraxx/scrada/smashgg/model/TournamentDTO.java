@@ -12,8 +12,91 @@ public class TournamentDTO {
     @NonNull
     private Long tournamentId;
 
-    String name;
-    String shortSlug;
+    private long registrationClosesAt;
+    private String name;
+    private String shortSlug;
+    private String slug;
+    private boolean isRegistrationOpen;
+    private String city;
+    private long createdAt;
+    private long startAt;
+    private long endAt;
+    private int state;
+
+    private boolean isUserNotifiedBeforeOpen;
+    private boolean isUserNotifiedAfterOpen;
+
+    public boolean isUserNotifiedBeforeOpen() {
+        return isUserNotifiedBeforeOpen;
+    }
+
+    public void setUserNotifiedBeforeOpen(boolean userNotifiedBeforeOpen) {
+        isUserNotifiedBeforeOpen = userNotifiedBeforeOpen;
+    }
+
+    public boolean isUserNotifiedAfterOpen() {
+        return isUserNotifiedAfterOpen;
+    }
+
+    public void setUserNotifiedAfterOpen(boolean userNotifiedAfterOpen) {
+        isUserNotifiedAfterOpen = userNotifiedAfterOpen;
+    }
+
+    public long getRegistrationClosesAt() {
+        return registrationClosesAt;
+    }
+
+    public void setRegistrationClosesAt(long registrationClosesAt) {
+        this.registrationClosesAt = registrationClosesAt;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public boolean isRegistrationOpen() {
+        return isRegistrationOpen;
+    }
+
+    public void setRegistrationOpen(boolean registrationOpen) {
+        isRegistrationOpen = registrationOpen;
+    }
+
+    public long getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(long createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public long getStartAt() {
+        return startAt;
+    }
+
+    public void setStartAt(long startAt) {
+        this.startAt = startAt;
+    }
+
+    public long getEndAt() {
+        return endAt;
+    }
+
+    public void setEndAt(long endAt) {
+        this.endAt = endAt;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
 
     public Long getId() {
         return id;
@@ -46,5 +129,13 @@ public class TournamentDTO {
 
     public void setShortSlug(String shortSlug) {
         this.shortSlug = shortSlug;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }
