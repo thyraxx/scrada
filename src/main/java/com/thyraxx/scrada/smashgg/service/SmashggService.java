@@ -51,7 +51,7 @@ public class SmashggService {
     {
         // TODO: better var name or separate into it's own config?
         Set<Tournament> newTournaments = getSmashTournamentsEvents(SmashggConfig.searchTournamentsAfterEpochTime).stream()
-                .filter(tournament -> !tournament.getEvents().isEmpty() && !smashggRepository.existsByTournamentId(tournament.getTournamentId()))
+                .filter(tournament -> !tournament.getEvents().isEmpty() && !smashggRepository.existsByTournamentId(tournament.getTournamentId()) && tournament.getState() < 3)
                 .collect(Collectors.toSet());
 
         smashggRepository.saveAll(newTournaments);
