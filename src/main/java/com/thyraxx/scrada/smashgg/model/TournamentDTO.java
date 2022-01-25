@@ -3,6 +3,7 @@ package com.thyraxx.scrada.smashgg.model;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.Id;
+import java.util.List;
 
 public class TournamentDTO {
 
@@ -25,6 +26,16 @@ public class TournamentDTO {
 
     private boolean isUserNotifiedBeforeOpen;
     private boolean isUserNotifiedAfterOpen;
+
+    private List<EventDTO> events;
+
+    public List<EventDTO> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<EventDTO> events) {
+        this.events = events;
+    }
 
     public boolean isUserNotifiedBeforeOpen() {
         return isUserNotifiedBeforeOpen;
