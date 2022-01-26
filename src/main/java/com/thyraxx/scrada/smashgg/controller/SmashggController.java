@@ -1,13 +1,12 @@
 package com.thyraxx.scrada.smashgg.controller;
 
 import com.google.gson.Gson;
+import com.thyraxx.scrada.smashgg.model.Tournament;
 import com.thyraxx.scrada.smashgg.service.SmashggService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/api/smashgg")
@@ -31,6 +30,14 @@ public class SmashggController {
     public String getAllTournaments()
     {
         return new Gson().toJson(smashggService.getAllTournamentsDTO());
+    }
+
+    @PostMapping("/saveTournament")
+    public String saveTournament(@RequestBody Tournament tournament)
+    {
+        // TODO: change saving to a boolean to know if it actually is saved?
+        smashggService.save(tournament);
+        return "Saved!";
     }
 
     @GetMapping("/")
