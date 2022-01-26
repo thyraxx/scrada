@@ -26,13 +26,6 @@ public class SmashggController {
         return "index";
     }
 
-//    @GetMapping("/test")
-//    public String test(Model model)
-//    {
-//        smashggService.saveNewTournamentEvents();
-//        return "index";
-//    }
-
     @GetMapping("/getAllTournaments")
     @ResponseBody
     public String getAllTournaments()
