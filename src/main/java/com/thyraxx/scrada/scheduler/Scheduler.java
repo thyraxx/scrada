@@ -37,13 +37,6 @@ public class Scheduler {
         smashggService.sendNotification();
     }
 
-//    @Scheduled(fixedDelay = SmashggConfig.smashggAPICallDelay) // 60 seconds
-//    public void updateExistingTournamentData()
-//    {
-//        logger.debug("Updating data on: " + dateFormat  + " -> using method 'updateExistingTournamentData'");
-//        smashggService.updateExistingTournaments();
-//    }
-
     @Scheduled(fixedDelay = 43200000) // 12 hours
     public void deleteFinishedTournaments()
     {
