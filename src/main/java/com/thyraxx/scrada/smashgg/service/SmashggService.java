@@ -33,7 +33,7 @@ public class SmashggService {
         ModelMapper modelMapper = new ModelMapper();
         return smashggRepository.findAll().stream()
                 .map(tournament -> modelMapper.map(tournament, TournamentDTO.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<Tournament> getAllTournaments()
@@ -49,8 +49,7 @@ public class SmashggService {
 
     public void saveNewTournamentEvents()
     {
-        // TODO: better var name or separate into it's own config?
-        Set<Tournament> newTournaments = getSmashTournamentsEvents(SmashggConfig.searchTournamentsAfterEpochTime).stream()
+        Set<Tournament> newTournaments = getSmashTournamentsEvents(SmashggConfig.SEARCH_TOURNAMENT_AFTER_EPOCHTIME).stream()
                 .filter(tournament -> !tournament.getEvents().isEmpty() && !smashggRepository.existsByTournamentId(tournament.getTournamentId()) && tournament.getState() < 3)
                 .collect(Collectors.toSet());
 
@@ -70,7 +69,7 @@ public class SmashggService {
     {
         List<Tournament> tournaments = smashggRepository.findAll().stream()
                         .filter(tournament -> Instant.now().getEpochSecond() > tournament.getEndAt() )
-                        .collect(Collectors.toList());
+                        .toList();
 
         smashggRepository.deleteAll(tournaments);
     }
