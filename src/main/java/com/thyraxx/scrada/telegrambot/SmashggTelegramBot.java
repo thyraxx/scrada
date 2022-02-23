@@ -2,7 +2,6 @@ package com.thyraxx.scrada.telegrambot;
 
 import com.pengrad.telegrambot.Callback;
 import com.pengrad.telegrambot.TelegramBot;
-import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
 import com.thyraxx.scrada.customproperties.CustomProperties;
@@ -23,25 +22,15 @@ public class SmashggTelegramBot {
         return smashTelegramBot;
     }
 
-    private void registerUpdateListener()
-    {
-        smashTelegramBot.setUpdatesListener(updates -> {
-            return UpdatesListener.CONFIRMED_UPDATES_ALL;
-        });
-    }
-
     public static void sendMessage(long chatId, String message)
     {
         // Async call
+        // TODO: add check if message is sucecsfully send, otheriwse keep retrying?
         SendMessage sendMessage = new SendMessage(chatId, message).parseMode(HTML);
         smashTelegramBot.execute(sendMessage, new Callback<SendMessage, SendResponse>() {
             @Override
             public void onResponse(SendMessage sendMessage, SendResponse sendResponse) {
-//                if(sendResponse.isOk())
-//                {
-                    logger.debug("Send to chatId: " + chatId + "\n"
-                    + "with message: \n" + message);
-//                }
+                logger.debug("Send to chatId: {} %n with message: {} %n", chatId, message);
             }
 
             @Override
@@ -50,4 +39,6 @@ public class SmashggTelegramBot {
             }
         });
     }
+
+    private SmashggTelegramBot() {}
 }
