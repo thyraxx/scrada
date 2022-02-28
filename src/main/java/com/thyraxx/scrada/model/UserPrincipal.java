@@ -8,7 +8,7 @@ import java.util.Collections;
 
 public class UserPrincipal implements UserDetails {
 
-    private final User user;
+    private final UserModel userModel;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -17,12 +17,12 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return userModel.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return userModel.getUsername();
     }
 
     @Override
@@ -45,8 +45,8 @@ public class UserPrincipal implements UserDetails {
         return true;
     }
 
-    public UserPrincipal(User user)
+    public UserPrincipal(UserModel userModel)
     {
-        this.user = user;
+        this.userModel = userModel;
     }
 }
