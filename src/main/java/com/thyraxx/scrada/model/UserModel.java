@@ -3,10 +3,10 @@ package com.thyraxx.scrada.model;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
-import java.util.Map;
+import java.util.List;
 
 @Entity
-public class User {
+public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,8 +16,8 @@ public class User {
     private String username;
     private String password;
 
-    @ElementCollection
-    private Map<String, String> api_info;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Telegram> telegramList;
 
     public Long getId() {
         return id;
@@ -43,11 +43,11 @@ public class User {
         this.password = password;
     }
 
-    public Map<String, String> getApi_info() {
-        return api_info;
+    public List<Telegram> getTelegramList() {
+        return telegramList;
     }
 
-    public void setApi_info(Map<String, String> api_info) {
-        this.api_info = api_info;
+    public void setTelegramList(List<Telegram> telegramList) {
+        this.telegramList = telegramList;
     }
 }
