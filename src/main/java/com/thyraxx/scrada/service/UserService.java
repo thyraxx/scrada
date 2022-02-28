@@ -1,6 +1,6 @@
 package com.thyraxx.scrada.service;
 
-import com.thyraxx.scrada.model.User;
+import com.thyraxx.scrada.model.UserModel;
 import com.thyraxx.scrada.model.UserPrincipal;
 import com.thyraxx.scrada.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,8 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-        return new UserPrincipal(user);
+        UserModel userModel = userRepository.findByUsername(username);
+        return new UserPrincipal(userModel);
     }
 
     @Autowired
