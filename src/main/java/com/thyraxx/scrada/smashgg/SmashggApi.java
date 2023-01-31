@@ -17,7 +17,6 @@ import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.NameValuePair;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.apache.hc.core5.http.message.BasicNameValuePair;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
@@ -25,7 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -198,6 +196,11 @@ public class SmashggApi {
 
             ModelMapper modelMapper = new ModelMapper();
             for (Node node : root.getData().getTournaments().getNodes()) {
+
+                // For some reason, some events are null instead of an empty array
+                if(node.getEvents() == null)
+                    continue;
+
                 for (Event event : node.getEvents()) {
                     Map<String, Double> extraEventInfo = getExtraEventInfo(event.getSlug());
 
