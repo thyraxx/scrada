@@ -27,10 +27,11 @@ public class SmashggTelegramBot {
         // Async call
         // TODO: add check if message is sucecsfully send, otheriwse keep retrying?
         SendMessage sendMessage = new SendMessage(chatId, message).parseMode(HTML);
+
+        logger.debug("Send to chatId: {} %n with message: {} %n", chatId, message);
         smashTelegramBot.execute(sendMessage, new Callback<SendMessage, SendResponse>() {
             @Override
             public void onResponse(SendMessage sendMessage, SendResponse sendResponse) {
-                logger.debug("Send to chatId: {} %n with message: {} %n", chatId, message);
             }
 
             @Override
