@@ -11,7 +11,7 @@ public class Event {
 
     private String eventName;
     private String eventSlug;
-    private int fee;
+    private double fee;
     private int valueLimit;
 
     // TODO: change to byte?
@@ -60,11 +60,11 @@ public class Event {
         this.tournament = tournament;
     }
 
-    public int getFee() {
+    public double getFee() {
         return fee;
     }
 
-    public void setFee(int fee) {
+    public void setFee(double fee) {
         this.fee = fee;
     }
 
