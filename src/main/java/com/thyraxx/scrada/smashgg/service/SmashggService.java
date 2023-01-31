@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -42,8 +43,7 @@ public class SmashggService {
     }
 
     // TODO: change name into API call?
-    public List<Tournament> getSmashTournamentsEvents(String variables)
-    {
+    public List<Tournament> getSmashTournamentsEvents(String variables) {
         return SmashggApi.getSmashTournamentEvents(variables);
     }
 
@@ -56,13 +56,14 @@ public class SmashggService {
         smashggRepository.saveAll(newTournaments);
     }
 
-    public void updateExistingTournaments()
-    {
-        smashggRepository.findAll().forEach(tournament -> {
-            Tournament updatedTournamentData = SmashggApi.updateExistingTournaments(tournament.getTournamentId());
-            smashggRepository.save(updatedTournamentData);
-        });
-    }
+    // TODO: use or remove
+//    public void updateExistingTournaments()
+//    {
+//        smashggRepository.findAll().forEach(tournament -> {
+//            Tournament updatedTournamentData = SmashggApi.updateExistingTournaments(tournament.getTournamentId());
+//            smashggRepository.save(updatedTournamentData);
+//        });
+//    }
 
     // TODO: optimize query, let database decide instead of retrieving first all entities?
     public void deleteFinishedTournaments()
