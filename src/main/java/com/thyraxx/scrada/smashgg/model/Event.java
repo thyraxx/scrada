@@ -1,7 +1,9 @@
 package com.thyraxx.scrada.smashgg.model;
 
 
-import javax.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Event {
