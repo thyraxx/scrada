@@ -1,8 +1,8 @@
 package com.thyraxx.scrada.model;
 
+import jakarta.persistence.*;
 import org.springframework.lang.NonNull;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Entity

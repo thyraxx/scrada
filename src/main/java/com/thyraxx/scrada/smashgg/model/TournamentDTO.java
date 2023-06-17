@@ -2,7 +2,7 @@ package com.thyraxx.scrada.smashgg.model;
 
 import org.springframework.lang.NonNull;
 
-import javax.persistence.Id;
+import jakarta.persistence.Id;
 import java.util.List;
 
 public class TournamentDTO {
