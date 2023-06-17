@@ -50,7 +50,12 @@ public class SmashggService {
     public void saveNewTournamentEvents()
     {
         Set<Tournament> newTournaments = getSmashTournamentsEvents(SmashggConfig.SEARCH_TOURNAMENT_AFTER_EPOCHTIME).stream()
-                .filter(tournament -> !tournament.getEvents().isEmpty() && !smashggRepository.existsByTournamentId(tournament.getTournamentId()) && tournament.getState() < 3)
+                .filter(tournament ->
+                        !tournament.getEvents().isEmpty() &&
+                        tournament.getState() == 1 &&
+                        // tournament.getRegistrationClosesAt() > Instant.now().getEpochSecond() &&
+                        (!smashggRepository.existsByTournamentId(tournament.getTournamentId()) || smashggRepository.findTournamentByTournamentId(tournament.getTournamentId()).isRegistrationOpen() != tournament.isRegistrationOpen())
+                )
                 .collect(Collectors.toSet());
 
         smashggRepository.saveAll(newTournaments);
